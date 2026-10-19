@@ -59,24 +59,37 @@ with tab1:
     active_ai_cost = (missed_failures * sim_cost) + ai_overhead
     net_savings_optimised = baseline_loss - active_ai_cost
     
+    
     col1, col2, col3 = st.columns(3)
+
     with col1:
-        st.metric(label="Reactive Strategy Cost", value=f"£{baseline_loss:,.0f}")
+        st.metric(
+            label="Reactive Strategy Cost",
+            value=f"£{baseline_loss:,.0f}"
+        )
+
     with col2:
-        st.metric(label="Optimised AI Cost", value=f"£{active_ai_cost:,.0f}", delta=f"-{recall_rate}% Outages")
+        st.metric(
+            label="Optimised AI Cost",
+            value=f"£{active_ai_cost:,.0f}",
+            delta=f"-{recall_rate}% Outages"
+        )
+
     with col3:
-      st.metric(
-    label="Estimated Net Savings",
-    value=f"£{net_savings_optimised:,.0f}",
-    delta="Illustrative scenario",
-    delta_color="normal"
-)
-        st.caption(
-    "Illustrative estimate only. Savings are calculated using "
-    "user-selected outage and repair-cost assumptions, the model's "
-    "recall rate, and an assumed AI overhead. These are not verified "
-    "real-world savings or a guarantee of future performance."
-)
+        st.metric(
+            label="Estimated Net Savings",
+            value=f"£{net_savings_optimised:,.0f}",
+            delta="Illustrative scenario",
+            delta_color="normal"
+        )
+
+    st.caption(
+        "Illustrative estimate only. Savings are calculated using "
+        "user-selected outage and repair-cost assumptions, the model's "
+        "recall rate, and an assumed AI overhead. These are not verified "
+        "real-world savings or a guarantee of future performance."
+    )
+
         
     st.divider()
     
