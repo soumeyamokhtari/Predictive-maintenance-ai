@@ -65,7 +65,18 @@ with tab1:
     with col2:
         st.metric(label="Optimised AI Cost", value=f"£{active_ai_cost:,.0f}", delta=f"-{recall_rate}% Outages")
     with col3:
-        st.metric(label="Net Mitigated Savings", value=f"£{net_savings_optimised:,.0f}", delta="Verified", delta_color="normal")
+      st.metric(
+    label="Estimated Net Savings",
+    value=f"£{net_savings_optimised:,.0f}",
+    delta="Illustrative scenario",
+    delta_color="normal"
+)
+        st.caption(
+    "Illustrative estimate only. Savings are calculated using "
+    "user-selected outage and repair-cost assumptions, the model's "
+    "recall rate, and an assumed AI overhead. These are not verified "
+    "real-world savings or a guarantee of future performance."
+)
         
     st.divider()
     
