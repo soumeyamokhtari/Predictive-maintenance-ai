@@ -37,4 +37,40 @@ After the dissertation, I ran a stricter evaluation on the AI4I dataset (repeate
 * Under chronological evaluation, performance dropped for all feature sets. The test folds contain few failures, so these results are noisy.
 * Model probabilities were calibrated (Platt scaling) because SMOTE shifts the class balance.
 
-**Limitations:** AI4I is synthetic and its failure labels follow rule-based conditions, so these findings may not hold for real plants. Rows
+**Limitations:** AI4I is synthetic and its failure labels follow rule-based conditions, so these findings may not hold for real plants. Rows are not true consecutive time series for every sensor, so rolling-window features should be read as exploratory.
+
+---
+
+## 🛠️ Technical Tech Stack
+* **Language:** Python 3.x
+* **Machine Learning:** XGBoost, Scikit-learn, SMOTE (Imbalanced-learn)
+* **Explainable AI:** SHAP
+* **Signal Processing:** Fast Fourier Transform (FFT), SciPy
+* **Data Engineering:** Pandas, NumPy
+* **Optimisation & Visualisation:** GridSearchCV, Streamlit Cloud
+
+---
+
+## 💻 Repository Contents
+* [`Predictive_Maintenance.ipynb`](./Predictive_Maintenance.ipynb): the dissertation notebook (pipelines, evaluation metrics and SHAP visualisations).
+* `app.py`: the Streamlit dashboard.
+
+---
+
+## 🚀 How to Run Locally
+
+1. Clone this repository:
+```bash
+git clone https://github.com/soumeyamokhtari/Predictive-maintenance-ai.git
+cd Predictive-maintenance-ai
+```
+
+2. Install the dependencies:
+```bash
+pip install -r requirements.txt
+```
+
+3. Launch the dashboard:
+```bash
+streamlit run app.py
+```
