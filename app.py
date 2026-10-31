@@ -6,7 +6,7 @@ import os
 st.set_page_config(
     page_title="XGBoost Industrial IoT Fault Diagnosis",
     page_icon="⚙️",
-    layout="centered" 
+    layout="centered"
 )
 
 # 2. Top-Level Header
@@ -14,7 +14,7 @@ st.title("⚙️ Predictive Maintenance in Industrial IoT")
 st.markdown("### Explainable XGBoost & FFT Framework | MSc Dissertation ")
 st.write("---")
 
-# 3. Sidebar Configuration 
+# 3. Sidebar Configuration
 st.sidebar.header("🎯 Domain & Simulation Settings")
 domain = st.sidebar.selectbox(
     "Select Industrial Domain Layer:",
@@ -26,12 +26,12 @@ st.sidebar.subheader("💰 Live ROI Cost Parameters")
 
 if "Chemical" in domain:
     default_failures = 50
-    default_repair = 15800  
+    default_repair = 15800
     recall_rate = 89.87
     ai_overhead = 2400
 else:
     default_failures = 40
-    default_repair = 17000  
+    default_repair = 17000
     recall_rate = 80.88
     ai_overhead = 4000
 
@@ -40,8 +40,8 @@ sim_cost = st.sidebar.slider("Reactive Repair Cost per Asset (£)", 1000, 30000,
 
 # 4. Multi-Tab Architecture
 tab1, tab2, tab3, tab4 = st.tabs([
-    "💰 ROI Calculator", 
-    "📊 Model Evaluation", 
+    "💰 ROI Calculator",
+    "📊 Model Evaluation",
     "🧬 Engineering & SHAP",
     "🔄 CRISP-DM Lifecycle"
 ])
@@ -52,14 +52,13 @@ tab1, tab2, tab3, tab4 = st.tabs([
 with tab1:
     st.header("💵 Financial Impact Matrix")
     st.markdown("This simulator calculates cost benefits based on your selected parameters, maintaining the model validation constraints from the dissertation data.")
-    
+
     baseline_loss = sim_failures * sim_cost
     mitigated_failures = int(sim_failures * (recall_rate / 100))
     missed_failures = sim_failures - mitigated_failures
     active_ai_cost = (missed_failures * sim_cost) + ai_overhead
     net_savings_optimised = baseline_loss - active_ai_cost
-    
-    
+
     col1, col2, col3 = st.columns(3)
 
     with col1:
@@ -90,9 +89,8 @@ with tab1:
         "real-world savings or a guarantee of future performance."
     )
 
-        
     st.divider()
-    
+
     st.subheader("📊 Operational Cost Comparison")
     viz_df = pd.DataFrame({
         "Maintenance Strategy": ["Traditional Reactive", "Optimised XGBoost Framework"],
@@ -105,11 +103,11 @@ with tab1:
 # ==========================================
 with tab2:
     st.header("📊 Scientific Model Verification Metrics")
-    
- st.success("""
+
+    st.success("""
     💡 **Optimisation Strategy (Recall over Accuracy):** In industrial predictive maintenance, missing a failure (False Negative) is typically more costly than a false alarm (False Positive). This framework therefore prioritises **Recall**. This produced a large recall gain on the mechanical dataset and a slight recall drop on the chemical dataset, reflecting the trade-off between recall and precision.
     """)
-    
+
     if "Chemical" in domain:
         st.subheader("🧪 Chemical Expert Model Performance")
         metrics_df = pd.DataFrame({
@@ -122,7 +120,7 @@ with tab2:
         st.subheader("🔢 Real Confusion Matrix (Chemical)")
         if os.path.exists("image/cm_chemical.png"):
             st.image("image/cm_chemical.png", caption="Real Confusion Matrix output from XGBoost Chemical Model")
-            
+
     else:
         st.subheader("⚙️ Mechanical Expert Model Performance")
         metrics_df = pd.DataFrame({
@@ -132,57 +130,4 @@ with tab2:
         })
         st.table(metrics_df)
         st.divider()
-        st.subheader("🔢 Real Confusion Matrix (Mechanical)")
-        if os.path.exists("image/cm_mechanical.png"):
-            st.image("image/cm_mechanical.png", caption="Real Confusion Matrix output from XGBoost Mechanical Model")
-            
-# ==========================================
-# TAB 3: PHYSICS-INFORMED FEATURE ENGINEERING & SHAP
-# ==========================================
-with tab3:
-    st.header("🧬 Feature Engineering & Explainable AI (XAI)")
-    
-    st.info("""
-    🤝 **Bridging the Trust Gap for Industry 5.0:** Industries are cautious about the "black box" nature of advanced ML such as XGBoost. SHAP shows which features the model relied on for each prediction, which supports review by maintenance engineers. It does not by itself establish the physical cause of a fault. This human-centric transparency supports the human-in-the-loop principles of **Industry 5.0**.
-    """)
-    
-    st.subheader("📐 Custom Feature Generation Strategy")
-    if "Chemical" in domain:
-        st.markdown("""
-        **Dual-Domain Transformation (Rolling Analysis):**
-        * **Time-Domain Engineering:** Extracted rolling statistical metrics (mean, standard deviation) across the time-series windows to capture early baseline drift.
-        * **Frequency-Domain (Rolling FFT):** Applied Fast Fourier Transform (FFT) algorithms across the rolling windows for **all sensor telemetry** to systematically extract hidden periodic volatility signatures. 
-        
-        *(Note: While SHAP analysis later revealed that specific engineered features like `VOC_FFT` became the strongest predictors of failure, the FFT transformation pipeline was applied universally across the entire dataset.)*
-        """)
-        st.divider()
-        st.subheader("🔍 Real SHAP Beeswarm Plot (Chemical Drivers)")
-        if os.path.exists("image/shap_chemical.png"):
-            st.image("image/shap_chemical.png", caption="True SHAP values showing the impact of rolling features on model output")
-
-    else:
-        st.markdown("""
-        **Physics-Informed & Frequency Implementations:**
-        1. **Physics-Informed Equations:** Translated raw streaming IoT variables into hard physical boundaries:
-           * **Mechanical Power:** $Power = Torque(Nm) \times \left[Speed(RPM) \times \frac{2\pi}{60}\right]$
-           * **Thermal Dissipation:** $\Delta T = Process\_Temp(K) - Air\_Temp(K)$
-        2. **Rolling FFT Analysis:** Applied continuous Fast Fourier Transform across the **entire mechanical time-series dataset** to test whether frequency-domain features add predictive value.
-        
-        *(Note: While SHAP analysis later revealed that features like `Tool_wear_min_FFT` ranked as critical drivers, the FFT pipeline processed all available sensor variables.)*
-        """)
-        st.divider()
-        st.subheader("🔍 Real SHAP Beeswarm Plot (Mechanical Drivers)")
-        if os.path.exists("image/shap_mechanical.png"):
-            st.image("image/shap_mechanical.png", caption="True SHAP values showing Physics-Informed and FFT feature impacts")
-
-# ==========================================
-# TAB 4: CRISP-DM FRAMEWORK LIFECYCLE
-# ==========================================
-with tab4:
-    st.header("🔄 Applied Data Lifecycle Methodology")
-    st.markdown("This deployment pipeline strictly adheres to the industrial **CRISP-DM** lifecycle standard to guarantee reliable, production-grade deployment updates.")
-    st.divider()
-    
-    st.subheader("🔄 Real-World CRISP-DM Implementation Cycle")
-    if os.path.exists("image/crisp_dm.png"):
-        st.image("image/crisp_dm.png", caption="Engineering lifecycle diagram from initial understanding to XAI deployment")
+        st.subheader("🔢 Real Confusion Matrix
