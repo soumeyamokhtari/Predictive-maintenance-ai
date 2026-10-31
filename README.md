@@ -37,8 +37,9 @@ Using **SHAP (SHapley Additive exPlanations)**, the black-box nature of the XGBo
 ## 💻 Core Source Code
 * Standard core machine learning pipelines, evaluation metrics, and SHAP explainability visualisations can be viewed directly in the [Predictive_Maintenance.ipynb](./Predictive_Maintenance.ipynb) notebook file.
 ---
-
-
+## Follow-up analysis
+* physics features gave the main gain. Rolling and FFT features gave no measurable extra benefit on AI4I.
+---
 ## 🚀 How to Run Locally
 
 1. Clone this repository:
