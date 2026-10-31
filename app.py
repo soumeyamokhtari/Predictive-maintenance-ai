@@ -130,4 +130,57 @@ with tab2:
         })
         st.table(metrics_df)
         st.divider()
-        st.subheader("🔢 Real Confusion Matrix
+        st.subheader("🔢 Real Confusion Matrix (Mechanical)")
+        if os.path.exists("image/cm_mechanical.png"):
+            st.image("image/cm_mechanical.png", caption="Real Confusion Matrix output from XGBoost Mechanical Model")
+
+# ==========================================
+# TAB 3: PHYSICS-INFORMED FEATURE ENGINEERING & SHAP
+# ==========================================
+with tab3:
+    st.header("🧬 Feature Engineering & Explainable AI (XAI)")
+
+    st.info("""
+    🤝 **Bridging the Trust Gap for Industry 5.0:** Industries are cautious about the "black box" nature of advanced ML such as XGBoost. SHAP shows which features the model relied on for each prediction, which supports review by maintenance engineers. It does not by itself establish the physical cause of a fault. This human-centric transparency supports the human-in-the-loop principles of **Industry 5.0**.
+    """)
+
+    st.subheader("📐 Custom Feature Generation Strategy")
+    if "Chemical" in domain:
+        st.markdown("""
+        **Dual-Domain Transformation (Rolling Analysis):**
+        * **Time-Domain Engineering:** Extracted rolling statistical metrics (mean, standard deviation) across the time-series windows to capture early baseline drift.
+        * **Frequency-Domain (Rolling FFT):** Applied Fast Fourier Transform (FFT) algorithms across the rolling windows for **all sensor telemetry** to test whether frequency-domain features add predictive value.
+
+        *(Note: While SHAP analysis later revealed that specific engineered features like `VOC_FFT` became the strongest predictors of failure, the FFT transformation pipeline was applied universally across the entire dataset.)*
+        """)
+        st.divider()
+        st.subheader("🔍 Real SHAP Beeswarm Plot (Chemical Drivers)")
+        if os.path.exists("image/shap_chemical.png"):
+            st.image("image/shap_chemical.png", caption="True SHAP values showing the impact of rolling features on model output")
+
+    else:
+        st.markdown("""
+        **Physics-Informed & Frequency Implementations:**
+        1. **Physics-Informed Equations:** Translated raw streaming IoT variables into hard physical boundaries:
+           * **Mechanical Power:** $Power = Torque(Nm) \\times \\left[Speed(RPM) \\times \\frac{2\\pi}{60}\\right]$
+           * **Thermal Dissipation:** $\\Delta T = Process\\_Temp(K) - Air\\_Temp(K)$
+        2. **Rolling FFT Analysis:** Applied continuous Fast Fourier Transform across the **entire mechanical time-series dataset** to test whether frequency-domain features add predictive value.
+
+        *(Note: While SHAP analysis later revealed that features like `Tool_wear_min_FFT` ranked as critical drivers, the FFT pipeline processed all available sensor variables.)*
+        """)
+        st.divider()
+        st.subheader("🔍 Real SHAP Beeswarm Plot (Mechanical Drivers)")
+        if os.path.exists("image/shap_mechanical.png"):
+            st.image("image/shap_mechanical.png", caption="True SHAP values showing Physics-Informed and FFT feature impacts")
+
+# ==========================================
+# TAB 4: CRISP-DM FRAMEWORK LIFECYCLE
+# ==========================================
+with tab4:
+    st.header("🔄 Applied Data Lifecycle Methodology")
+    st.markdown("This deployment pipeline strictly adheres to the industrial **CRISP-DM** lifecycle standard to guarantee reliable, production-grade deployment updates.")
+    st.divider()
+
+    st.subheader("🔄 Real-World CRISP-DM Implementation Cycle")
+    if os.path.exists("image/crisp_dm.png"):
+        st.image("image/crisp_dm.png", caption="Engineering lifecycle diagram from initial understanding to XAI deployment")
