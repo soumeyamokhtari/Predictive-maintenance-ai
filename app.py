@@ -114,9 +114,9 @@ with tab2:
     if "Chemical" in domain:
         st.subheader("🧪 Chemical Expert Model Performance")
         metrics_df = pd.DataFrame({
-            "Evaluation Metric": ["Accuracy", "Recall (Catch Rate)", "F1-Score", "CV Stability"],
-            "Baseline Architecture": ["91.53%", "91.14%", "N/A", "89.54%"],
-            "Optimised Expert Model": ["91.01%", "89.87%", "89.31%", "90.48%"]
+            "Evaluation Metric": ["Accuracy", "Recall (Catch Rate)", "F1-Score"],
+            "Baseline Architecture": ["91.53%", "91.14%", "N/A"],
+            "Optimised Expert Model": ["91.01%", "89.87%", "89.31%"]
         })
         st.table(metrics_df)
         st.divider()
@@ -127,9 +127,9 @@ with tab2:
     else:
         st.subheader("⚙️ Mechanical Expert Model Performance")
         metrics_df = pd.DataFrame({
-            "Evaluation Metric": ["Accuracy", "Recall (Catch Rate)", "F1-Score", "CV Stability"],
-            "Baseline Architecture": ["~98.60%", "69.12%", "N/A", "98.44%"],
-            "Optimised Expert Model": ["~98.60%", "80.88%", "79.71%", "98.05%"]
+            "Evaluation Metric": ["Accuracy", "Recall (Catch Rate)", "F1-Score"],
+            "Baseline Architecture": ["~98.60%", "69.12%", "N/A"],
+            "Optimised Expert Model": ["~98.60%", "80.88%", "79.71%"]
         })
         st.table(metrics_df)
         st.divider()
