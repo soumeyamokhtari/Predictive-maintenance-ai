@@ -108,7 +108,7 @@ with tab2:
     
     st.success("""
     💡 **Optimisation Strategy (Recall over Accuracy):** In industrial predictive maintenance, missing a catastrophic failure (False Negative) is vastly more dangerous and expensive than tripping a false alarm (False Positive). Therefore, this framework prioritises **Recall optimisation**. 
-    While this led to a massive recall surge in the mechanical dataset, it resulted in a slight, mathematically acceptable drop in the chemical dataset to achieve cross-domain stability.
+    While this led to a massive recall surge in the mechanical dataset, it resulted in a slight, mathematically acceptable drop in the chemical dataset to reflecting the trade-off between recall and precision.
     """)
     
     if "Chemical" in domain:
@@ -144,7 +144,7 @@ with tab3:
     st.header("🧬 Feature Engineering & Explainable AI (XAI)")
     
     st.info("""
-    🤝 **Bridging the Trust Gap for Industry 5.0:** Industries currently struggle with the "black box" nature of advanced ML like XGBoost. By applying SHAP, this framework provides technically verifiable transparency for every single prediction. When maintenance engineers can physically see *why* a machine is failing, they trust the AI. This human-centric transparency directly promotes the green energy efficiency goals of **Industry 5.0**.
+    🤝 **Bridging the Trust Gap for Industry 5.0:** Industries currently struggle with the "black box" nature of advanced ML like XGBoost. By applying SHAP, this framework provides SHAP shows which features the model relied on for each prediction. It supports engineer review, but it does not by itself establish the physical cause of a fault, they trust the AI. This human-centric transparency directly promotes the green energy efficiency goals of **Industry 5.0**.
     """)
     
     st.subheader("📐 Custom Feature Generation Strategy")
@@ -167,7 +167,7 @@ with tab3:
         1. **Physics-Informed Equations:** Translated raw streaming IoT variables into hard physical boundaries:
            * **Mechanical Power:** $Power = Torque(Nm) \times \left[Speed(RPM) \times \frac{2\pi}{60}\right]$
            * **Thermal Dissipation:** $\Delta T = Process\_Temp(K) - Air\_Temp(K)$
-        2. **Rolling FFT Analysis:** Applied continuous Fast Fourier Transform across the **entire mechanical time-series dataset** to capture subtle rotational and vibrational imbalances. 
+        2. **Rolling FFT Analysis:** Applied continuous Fast Fourier Transform across the **entire mechanical time-series dataset** to test whether frequency-domain features add predictive value.
         
         *(Note: While SHAP analysis later revealed that features like `Tool_wear_min_FFT` ranked as critical drivers, the FFT pipeline processed all available sensor variables.)*
         """)
