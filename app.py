@@ -106,9 +106,8 @@ with tab1:
 with tab2:
     st.header("📊 Scientific Model Verification Metrics")
     
-    st.success("""
-    💡 **Optimisation Strategy (Recall over Accuracy):** In industrial predictive maintenance, missing a catastrophic failure (False Negative) is vastly more dangerous and expensive than tripping a false alarm (False Positive). Therefore, this framework prioritises **Recall optimisation**. 
-    While this led to a massive recall surge in the mechanical dataset, it resulted in a slight, mathematically acceptable drop in the chemical dataset to reflecting the trade-off between recall and precision.
+ st.success("""
+    💡 **Optimisation Strategy (Recall over Accuracy):** In industrial predictive maintenance, missing a failure (False Negative) is typically more costly than a false alarm (False Positive). This framework therefore prioritises **Recall**. This produced a large recall gain on the mechanical dataset and a slight recall drop on the chemical dataset, reflecting the trade-off between recall and precision.
     """)
     
     if "Chemical" in domain:
@@ -144,7 +143,7 @@ with tab3:
     st.header("🧬 Feature Engineering & Explainable AI (XAI)")
     
     st.info("""
-    🤝 **Bridging the Trust Gap for Industry 5.0:** Industries currently struggle with the "black box" nature of advanced ML like XGBoost. By applying SHAP, this framework provides SHAP shows which features the model relied on for each prediction. It supports engineer review, but it does not by itself establish the physical cause of a fault, they trust the AI. This human-centric transparency directly promotes the green energy efficiency goals of **Industry 5.0**.
+    🤝 **Bridging the Trust Gap for Industry 5.0:** Industries are cautious about the "black box" nature of advanced ML such as XGBoost. SHAP shows which features the model relied on for each prediction, which supports review by maintenance engineers. It does not by itself establish the physical cause of a fault. This human-centric transparency supports the human-in-the-loop principles of **Industry 5.0**.
     """)
     
     st.subheader("📐 Custom Feature Generation Strategy")
