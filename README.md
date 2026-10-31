@@ -30,10 +30,9 @@ Using **XGBoost** models optimised via **GridSearchCV** and balanced via **SMOTE
 
 ## 🔬 Follow-up Analysis
 After the dissertation, I ran a stricter evaluation on the AI4I dataset (repeated 5-fold cross-validation with SMOTE applied inside each fold, plus forward-chaining cross-validation):
-
 * The physics-informed features (`Mechanical_Power`, `Temp_Delta`) gave the clear improvement: PR-AUC 0.81 → 0.86 under random cross-validation.
 * Rolling time-domain and FFT features added no measurable benefit on top of the physics-informed features.
-* Time-domain and frequency-domain features performed equivalently.
+* Time-domain and frequency-domain features performed about the same.
 * Under chronological evaluation, performance dropped for all feature sets. The test folds contain few failures, so these results are noisy.
 * Model probabilities were calibrated (Platt scaling) because SMOTE shifts the class balance.
 
@@ -41,7 +40,7 @@ After the dissertation, I ran a stricter evaluation on the AI4I dataset (repeate
 
 ---
 
-## 🛠️ Technical Tech Stack
+## 🛠️ Tech Stack
 * **Language:** Python 3.x
 * **Machine Learning:** XGBoost, Scikit-learn, SMOTE (Imbalanced-learn)
 * **Explainable AI:** SHAP
