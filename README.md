@@ -12,8 +12,8 @@ This research bridges the interpretability gap in industrial fault diagnosis by 
 
 ### 📊 Model Performance & Data Validation
 Using **XGBoost** models optimised via **GridSearchCV** and balanced via **SMOTE**, the system achieved high-accuracy predictive thresholds:
-* **Chemical Domain Expert Model:** **89.87% Recall** | **89.31% F1-Score** (Validated on AI4I 2020 Predictive Maintenance Dataset)
-* **Mechanical Domain Expert Model:** **80.88% Recall** | **79.71% F1-Score** (Validated on Sensor Machine Failure Dataset)
+* **Chemical Domain Expert Model:** **89.87% recall** | **89.31% F1-Score** (Validated on Sensor Machine Failure Dataset)
+* **Mechanical Domain Expert Model:** **80.88% recall** | **79.71% F1-Score** (Validated on AI4I 2020 Predictive Maintenance Dataset)
 
 ---
 
